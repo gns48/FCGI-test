@@ -1,3 +1,29 @@
+Qualification test prepared for one of my emploers
+
+Task: Create mutlithreaded web application that return stat(2) info 
+      for given filename and perform perfomance tests
+
+Input: json data like: {"Request type":"GetProperties","Path":"/etc/passwd"}
+Result Json data like the folowing
+
+{
+   "Path" : "/etc/passwd",
+   "Properties" : {
+      "Name" : "passwd",
+      "number of hard links" : 1,
+      "owner ID" : 0,
+      "owner group ID" : 0,
+      "protection" : "-rw-r--r--",
+      "size" : 2877,
+      "time of last access" : "Sun Dec 21 23:16:08 2014\n",
+      "time of last modification" : "Tue Nov  4 03:25:28 2014\n",
+      "time of last status change" : "Tue Nov  4 03:25:28 2014\n",
+      "type" : "regular file"
+   }
+}
+
+
+
 1. Prerequisites (for linux)
 
    - c++11 - aware compiler (sufficiently new gcc or clang is good)
@@ -74,10 +100,10 @@ Allowed options:
 
 5. Performance testing:
 
-gleb@raccoon:~/src/Acronis$ uname -a
+gleb@raccoon:~/src/$ uname -a
 Linux raccoon 3.13.0-43-generic #72-Ubuntu SMP Mon Dec 8 19:35:06 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 
-gleb@raccoon:~/src/Acronis$ cpuinfo
+gleb@raccoon:~/src/$ cpuinfo
 Intel(R) Core(TM) i5-3320M  Processor (Intel64 )
 =====  Processor composition  =====
 Processors(CPUs)  : 4
@@ -100,7 +126,7 @@ L2	256 KB		(0,1)(2,3)
 L3	3   MB		(0,1,2,3)
 
 
-gleb@raccoon:~/src/Acronis$ ab -n 1000 -c 200 http://localhost/test.cgi?\{%22Request%20type%22:%22GetProperties%22,%22Path%22:%22/etc/init.d%22\} 
+gleb@raccoon:~/src/$ ab -n 1000 -c 200 http://localhost/test.cgi?\{%22Request%20type%22:%22GetProperties%22,%22Path%22:%22/etc/init.d%22\} 
 This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -158,7 +184,7 @@ Percentage of the requests served within a certain time (ms)
 
 Server output:
 
-gleb@raccoon:~/src/Acronis$ ./statserver -p 9090 -t 20
+gleb@raccoon:~/src/$ ./statserver -p 9090 -t 20
 last 60 seconds load: 1000 requests processed by 20 threads
 last 60 seconds load: 0 requests processed by 0 threads
 
